@@ -10,7 +10,11 @@ import view.interfaces.IGuiWindow;
 import view.interfaces.PaintCanvasBase;
 import view.interfaces.IUiModule;
 import controller.MouseController;
-import java.awt.*;
+import model.ShapeFactory;
+import model.interfaces.IShape;
+import model.ShapeList;
+import java.util.ArrayList;;
+
 
 public class Main {
     public static void main(String[] args){
@@ -19,18 +23,16 @@ public class Main {
         IUiModule uiModule = new Gui(guiWindow); //Wont have to modify/know
         ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
         IJPaintController controller = new JPaintController(uiModule, appState); //, only ever want one instance
+        final ShapeFactory SF = new ShapeFactory();
+        ShapeList SL = new ShapeList(new ArrayList<IShape>());
         controller.setup(); 
 
 
-        paintCanvas.addMouseListener(new MouseController(paintCanvas)); //Extends MouseAdapter
+        paintCanvas.addMouseListener(new MouseController(paintCanvas,appState,SF,SL)); //Extends MouseAdapter
 
         // For example purposes only; remove all lines below from your final project.
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
 
         /*
         // Filled in rectangle

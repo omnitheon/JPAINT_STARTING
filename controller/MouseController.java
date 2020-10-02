@@ -2,18 +2,25 @@ package controller;
 
 import java.awt.event.MouseAdapter;
 import model.Point;
+import model.ShapeType;
 import view.interfaces.PaintCanvasBase;
 import model.interfaces.ICommand;
 import java.awt.event.MouseEvent;
 import model.DrawRectangleCommand;
-
+import model.persistence.ApplicationState;
+import model.ShapeFactory;
+import model.ShapeList;
+import model.interfaces.IShape;
 
 public class MouseController extends MouseAdapter {
     private PaintCanvasBase pcb;
     private Point sPoint;
+    private ApplicationState appS;
+    private ShapeFactory SF;
+    private ShapeList SL;
 
 
-    public MouseController(PaintCanvasBase pcb){ this.pcb = pcb;}
+    public MouseController(PaintCanvasBase pcb, ApplicationState appS, ShapeFactory SF, ShapeList SL ){ this.pcb = pcb; this.appS = appS; this.SF = SF; this.SL = SL;}
     @Override
     public void mousePressed(MouseEvent e) { sPoint = new Point(e.getX(), e.getY());   }
     @Override
@@ -21,7 +28,11 @@ public class MouseController extends MouseAdapter {
         ICommand currentCommand;
         int w = e.getX() - sPoint.getX();
         int h = e.getY() - sPoint.getY();
-        currentCommand = new DrawRectangleCommand(sPoint.getX(), sPoint.getY(), h, w, e.getX(), e.getY(), pcb);
-        currentCommand.run();
+        if (appS.getActiveShapeType().equals(ShapeType.RECTANGLE)) {
+            IShape rect = SF.createRectangle(sPoint.getX(), sPoint.getY(), h, w, e.getX(), e.getY());
+            currentCommand = new DrawRectangleCommand(rect,pcb,SL);
+            currentCommand.run();
+        }
     }
+
 }

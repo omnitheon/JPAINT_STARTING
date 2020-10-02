@@ -3,6 +3,8 @@ package controller;
 import model.interfaces.IApplicationState;
 import view.EventName;
 import view.interfaces.IUiModule;
+import model.UndoCommand;
+import model.RedoCommand;
 
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
@@ -24,9 +26,9 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
         uiModule.addEvent(EventName.CHOOSE_MOUSE_MODE, () -> applicationState.setActiveStartAndEndPointMode());
+        uiModule.addEvent(EventName.UNDO, () -> new UndoCommand().run());
+        uiModule.addEvent(EventName.REDO, () -> new RedoCommand().run());
         //copy
         //pastes
-        //undo
-        //redo
     }
 }
