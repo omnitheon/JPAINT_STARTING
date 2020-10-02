@@ -25,55 +25,26 @@ public class ApplicationState implements IApplicationState {
         setDefaults();
     }
 
+    @Override //Dont worry, GUI does this.
+    public void setActiveShape() { activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog()); }
+    @Override //Dont worry, GUI does this.
+    public void setActivePrimaryColor() { activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog()); }
+    @Override //Dont worry, GUI does this. 
+    public void setActiveSecondaryColor() { activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog()); }
+    @Override //Dont worry, GUI does this.
+    public void setActiveShadingType() { activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog()); }
+    @Override //Dont worry, GUI does this.
+    public void setActiveStartAndEndPointMode() { activeMouseMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog()); }
     @Override
-    public void setActiveShape() {
-        activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-    }
-
+    public ShapeType getActiveShapeType() { return activeShapeType; } //May need this for implementing the sprints, set by GUI.
     @Override
-    public void setActivePrimaryColor() {
-        activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-    }
-
+    public ShapeColor getActivePrimaryColor() { return activePrimaryColor; } //May need this for implementing the sprints, set by GUI.
     @Override
-    public void setActiveSecondaryColor() {
-        activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-    }
-
+    public ShapeColor getActiveSecondaryColor() { return activeSecondaryColor; } //May need this for implementing the sprints, set by GUI.
     @Override
-    public void setActiveShadingType() {
-        activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-    }
-
+    public ShapeShadingType getActiveShapeShadingType() { return activeShapeShadingType; } //May need this for implementing the sprints, set by GUI.
     @Override
-    public void setActiveStartAndEndPointMode() {
-        activeMouseMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-    }
-
-    @Override
-    public ShapeType getActiveShapeType() {
-        return activeShapeType;
-    }
-
-    @Override
-    public ShapeColor getActivePrimaryColor() {
-        return activePrimaryColor;
-    }
-
-    @Override
-    public ShapeColor getActiveSecondaryColor() {
-        return activeSecondaryColor;
-    }
-
-    @Override
-    public ShapeShadingType getActiveShapeShadingType() {
-        return activeShapeShadingType;
-    }
-
-    @Override
-    public MouseMode getActiveMouseMode() {
-        return activeMouseMode;
-    }
+    public MouseMode getActiveMouseMode() { return activeMouseMode; } //May need this for implementing the sprints, set by GUI.
 
     private void setDefaults() {
         activeShapeType = ShapeType.RECTANGLE;

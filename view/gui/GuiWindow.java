@@ -16,8 +16,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private final int defaultWidth = 1250;
     private final int defaultHeight = 800;
     private final String defaultTitle = "JPaint";
-    private final Insets defaultButtonDimensions 
-    	= new Insets(5, 8, 5, 8);
+    private final Insets defaultButtonDimensions = new Insets(5, 8, 5, 8);
     private final Map<EventName, JButton> eventButtons = new HashMap<>();
 
     public GuiWindow(JComponent canvas){
@@ -34,8 +33,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 
     @Override
 	public JButton getButton(EventName eventName) {
-		if(!eventButtons.containsKey(eventName))
-			throw new NoSuchElementException("No button exists for action " + eventName.toString());
+		if(!eventButtons.containsKey(eventName)) throw new NoSuchElementException("No button exists for action " + eventName.toString());
 		
 		return eventButtons.get(eventName);
 	}
@@ -49,11 +47,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 
     private JPanel createMenu() {
         JPanel buttonPanel = createButtonPanel();
-
-        for(EventName eventName : EventName.values()){
-            addButtonToPanel(eventName, buttonPanel);
-        }
-
+        for(EventName eventName : EventName.values()) addButtonToPanel(eventName, buttonPanel);
         return buttonPanel;
     }
 

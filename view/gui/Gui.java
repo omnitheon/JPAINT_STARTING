@@ -9,13 +9,8 @@ import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
 
 public class Gui implements IUiModule {
-
     private final IGuiWindow gui;
-
-    public Gui(IGuiWindow gui) {
-        this.gui = gui;
-    }
-    
+    public Gui(IGuiWindow gui) { this.gui = gui; }
 	@Override
 	public void addEvent(EventName eventName, IEventCallback callback) {
 		JButton button = gui.getButton(eventName);
