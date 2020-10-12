@@ -10,6 +10,8 @@ import model.MouseMode;
 import model.persistence.ApplicationState;
 import model.persistence.ShapeList;
 import model.CreateShapeCommand;
+import model.CommandHistory;
+import model.interfaces.IUndoable;
 
 
 public class MouseController extends MouseAdapter {
@@ -37,6 +39,8 @@ public class MouseController extends MouseAdapter {
             //CreateShapeCommand
             c = new CreateShapeCommand(appS.getActiveShapeType(),SL,startingPoint,endingPoint,shapeHeight,shapeWidth);
             c.run();
+            System.out.println("[CreateShapeCommand] action added to CommandHistory...");
+            CommandHistory.add(((IUndoable)c));
             
             
         }
