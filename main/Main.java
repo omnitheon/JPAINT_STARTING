@@ -13,7 +13,7 @@ import controller.MouseController;
 import model.ShapeFactory;
 import model.interfaces.IShape;
 import model.ShapeList;
-import java.util.ArrayList;;
+import java.util.ArrayList;
 
 
 public class Main {
