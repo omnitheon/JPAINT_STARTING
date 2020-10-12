@@ -24,16 +24,16 @@ public class ShapeList implements Iterable<IShape> {
     public void add(IShape shape) { 
         System.out.println("[SHAPELIST] value added to ShapeList...");
         SL.add(shape);
-        ShapeDrawer SD = new ShapeDrawer(PCB,this);
-        SD.update();
-        //SCH.update();
+        //ShapeDrawer SD = new ShapeDrawer(PCB,this);
+        //SD.update();
+        SCH.update();
     }
     public void remove(int i) { 
         System.out.println("[SHAPELIST] value removed from ShapeList...");
         SL.remove(i);
-        ShapeDrawer SD = new ShapeDrawer(PCB,this);
-        SD.update();
-        //SCH.update();
+        //ShapeDrawer SD = new ShapeDrawer(PCB,this);
+        //SD.update();
+        SCH.update();
     }
     public int getShapeIndex(IShape shape) { return SL.indexOf(shape); }
     public List<IShape> getShapes() { return SL; }

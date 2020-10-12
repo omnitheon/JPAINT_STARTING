@@ -12,7 +12,7 @@ public class StateChangeHandler implements ISubject, IShapeListObserver {
     @Override public void removeObserver(IObserver observer) { observers.remove(observer); }
     private void notifyObservers(){ for(IObserver observer : observers) observer.update(); }
     @Override public void update() { 
-        System.out.println("[STATE CHANGE]..notifying observer");
+        System.out.println("[STATE HANDLER] update executed..notifying observer");
         notifyObservers(); 
     
     }
