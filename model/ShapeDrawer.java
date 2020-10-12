@@ -16,28 +16,15 @@ public class ShapeDrawer implements IObserver {
 
     private void drawAllShapes(){
         System.out.println("[ShapeDrawer] is drawing the canvas by looping through shapeList and executing DrawShapeCommand for each shape....");
-        wipe();
+        Graphics2D g2d = PCB.getGraphics2D();
+        g2d.setColor(PCB.getBackground());
+        g2d.fillRect(0, 0, PCB.getWidth(), PCB.getHeight());
         int i = 1;
         for(IShape shape : SL) {
             System.out.println("[ShapeDrawer] Loop#: "+Integer.toString(i++));
             ICommand currentDrawCommand = new DrawShapeCommand(shape,PCB,SL);
             currentDrawCommand.run();
-            
         }
-        /*
-        Graphics2D g2d = PCB.getGraphics2D();
-        g2d.setColor(PCB.getBackground());
-        g2d.fillRect(0, 0, PCB.getWidth(), PCB.getHeight());
-        for(IShape shape : SL) {
-            shape.draw(g2d);
-
-        }
-        */
-    }
-    private void wipe(){
-        Graphics2D g2d = PCB.getGraphics2D();
-        g2d.setColor(PCB.getBackground());
-        g2d.fillRect(0, 0, PCB.getWidth(), PCB.getHeight());
     }
     @Override public void update() { 
         System.out.println("[OBSERVER]..Observer has been notified...executing draw....");

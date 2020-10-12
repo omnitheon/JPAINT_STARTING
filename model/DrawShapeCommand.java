@@ -1,6 +1,5 @@
 package model;
 
-import model.interfaces.IUndoable;
 import java.awt.Color;
 import java.awt.*;
 import model.interfaces.ICommand;
@@ -13,6 +12,7 @@ public class DrawShapeCommand implements ICommand {
     PaintCanvasBase pcb;
     ShapeList SL;
     IShape shape;
+    Color shapeColor;
 
     public DrawShapeCommand (IShape shape, PaintCanvasBase pcb, ShapeList SL) {
     this.pcb = pcb;
@@ -23,7 +23,7 @@ public class DrawShapeCommand implements ICommand {
     public void run(){
         System.out.println("DrawShapeCommand executing...");
         Graphics2D g2d = pcb.getGraphics2D();
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(shape.getPrimaryColor());
         shape.draw(g2d);
     }
     }

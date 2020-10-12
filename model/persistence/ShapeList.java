@@ -6,7 +6,6 @@ import model.interfaces.IIterator;
 import java.util.ArrayList; 
 import java.util.Iterator;
 import model.StateChangeHandler;
-import view.interfaces.PaintCanvasBase;
 import model.ShapeDrawer;
 
 public class ShapeList implements Iterable<IShape> {

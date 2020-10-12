@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.MouseAdapter;
 import model.Point;
 import model.PointBuilder;
-import view.interfaces.PaintCanvasBase;
 import model.interfaces.ICommand;
 import java.awt.event.MouseEvent;
 import model.MouseMode;
@@ -15,15 +14,11 @@ import model.interfaces.IUndoable;
 
 
 public class MouseController extends MouseAdapter {
-    private PaintCanvasBase pcb;
     private Point startingPoint;
-    private Point endingPoint;
-    private ApplicationState appS;
+    private ApplicationState APPS;
     private ShapeList SL;
 
-    public MouseController(PaintCanvasBase pcb, ApplicationState appS, ShapeList SL){ 
-        this.pcb = pcb; this.appS = appS;  this.SL = SL;
-    }
+    public MouseController(ApplicationState APPS, ShapeList SL){ this.APPS = APPS;  this.SL = SL; }
     
     @Override public void mousePressed(MouseEvent e) { 
         startingPoint = new PointBuilder().setX(e.getX()).setY(e.getY()).returnPoint();
@@ -33,18 +28,18 @@ public class MouseController extends MouseAdapter {
         ICommand c;
         int shapeWidth = e.getX() - startingPoint.getX();
         int shapeHeight = e.getY() - startingPoint.getY();
-        endingPoint = new PointBuilder().setX(e.getX()).setY(e.getY()).returnPoint();
+        Point endingPoint = new PointBuilder().setX(e.getX()).setY(e.getY()).returnPoint();
         System.out.println("MouseReleased: "+endingPoint.toString());
-        if (appS.getActiveMouseMode().equals(MouseMode.DRAW)) {             
+        if (APPS.getActiveMouseMode().equals(MouseMode.DRAW)) {             
             //CreateShapeCommand
-            c = new CreateShapeCommand(appS.getActiveShapeType(),SL,startingPoint,endingPoint,shapeHeight,shapeWidth);
+            c = new CreateShapeCommand(APPS,SL,startingPoint,endingPoint,shapeHeight,shapeWidth);
             c.run();
             System.out.println("[CreateShapeCommand] action added to CommandHistory...");
             CommandHistory.add(((IUndoable)c));
             
             
         }
-        else if (appS.getActiveMouseMode().equals(MouseMode.SELECT)){}
+        else if (APPS.getActiveMouseMode().equals(MouseMode.SELECT)){}
             //SelectShapeCommand
         else { //MouseMode.MOVE
             //MoveShapeCommand

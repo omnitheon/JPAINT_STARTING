@@ -2,21 +2,10 @@ package model;
 import java.awt.*;
 
 public class Rectangle extends Shape {
-	int startingPointX;
-	int startingPointY;
-	int endingPointX;
-	int endingPointY;
-	int shapeHeight;
-	int shapeWidth;
+
 	
-	public Rectangle(int numSides, int startingPointX, int startingPointY, int endingPointX, int endingPointY, int shapeHeight, int shapeWidth) {
-		super(numSides);
-		this.startingPointX = startingPointX;
-		this.startingPointY = startingPointY;
-		this.endingPointX = endingPointX;
-		this.endingPointY = endingPointY;
-		this.shapeHeight = shapeHeight;
-		this.shapeWidth = shapeWidth;
+	public Rectangle(int numSides, Color PC, Color SC, int startingPointX, int startingPointY, int endingPointX, int endingPointY, int shapeHeight, int shapeWidth) {
+		super(numSides, PC, SC, startingPointX, startingPointY, endingPointX, endingPointY, shapeHeight, shapeWidth);
 	}
 
 	public void draw(Graphics2D g2d){

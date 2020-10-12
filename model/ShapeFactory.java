@@ -1,6 +1,7 @@
 package model;
 
 import model.interfaces.IShape;
+import java.awt.Color;
 /*
         ShapeFactory Client Code ... AKA "Consumer"... we receive IShapes
 
@@ -25,8 +26,8 @@ public class ShapeFactory {
     private ShapeFactory() { }
 
     //public IShape createEllipse() { return new Ellipse(1); }
-    public static IShape createRectangle(int x, int y, int eX, int eY, int h, int w) { 
-        return new Rectangle(4, x, y, eX, eY, h, w); 
+    public static IShape createRectangle(Color PC, Color SC, int x, int y, int eX, int eY, int h, int w) { 
+        return new Rectangle(4, PC, SC, x, y, eX, eY, h, w); 
     }
     //public IShape createTriangle(boolean isEquilateral) { return new Triangle(3, isEquilateral); }
 }

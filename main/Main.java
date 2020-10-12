@@ -32,7 +32,7 @@ public class Main {
         controller.setup(); 
 
 
-        PCB.addMouseListener(new MouseController(PCB,appState,SL)); //Extends MouseAdapter
+        PCB.addMouseListener(new MouseController(appState,SL)); //Extends MouseAdapter
 
         // For example purposes only; remove all lines below from your final project.
 
