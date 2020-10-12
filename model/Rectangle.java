@@ -2,23 +2,28 @@ package model;
 import java.awt.*;
 
 public class Rectangle extends Shape {
-	int x, y,  h,  w,  eX,  eY;
+	int startingPointX;
+	int startingPointY;
+	int endingPointX;
+	int endingPointY;
+	int shapeHeight;
+	int shapeWidth;
 	
-	public Rectangle(int numSides, int x, int y, int h, int w, int eX, int eY) {
+	public Rectangle(int numSides, int startingPointX, int startingPointY, int endingPointX, int endingPointY, int shapeHeight, int shapeWidth) {
 		super(numSides);
-		this.x = x;
-		this.y = y;
-		this.h = h;
-		this.w = w;
-		this.eX = eX;
-		this.eY = eY;
+		this.startingPointX = startingPointX;
+		this.startingPointY = startingPointY;
+		this.endingPointX = endingPointX;
+		this.endingPointY = endingPointY;
+		this.shapeHeight = shapeHeight;
+		this.shapeWidth = shapeWidth;
 	}
 
 	public void draw(Graphics2D g2d){
-		if (this.w > 0 && this.h > 0) g2d.fillRect(x, y, w, h);
-        else if (this.w < 0 && this.h > 0) g2d.fillRect(eX, y, Math.abs(w), h);
-        else if (this.w > 0 && this.h < 0) g2d.fillRect(x, eY, w, Math.abs(h));
-        else if (this.w < 0 && this.h < 0) g2d.fillRect(eX, eY, Math.abs(w), Math.abs(h));
+		if (this.shapeWidth > 0 && this.shapeHeight > 0) g2d.fillRect(startingPointX, startingPointY, shapeWidth, shapeHeight);
+        else if (this.shapeWidth < 0 && this.shapeHeight > 0) g2d.fillRect(endingPointX, startingPointY, Math.abs(shapeWidth), shapeHeight);
+        else if (this.shapeWidth > 0 && this.shapeHeight < 0) g2d.fillRect(startingPointX, endingPointY, shapeWidth, Math.abs(shapeHeight));
+        else if (this.shapeWidth < 0 && this.shapeHeight < 0) g2d.fillRect(endingPointX, endingPointY, Math.abs(shapeWidth), Math.abs(shapeHeight));
 
 	}
 

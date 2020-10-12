@@ -5,10 +5,10 @@ import model.interfaces.IShape;
 
 import java.awt.*;
 
-public class ShapeList {
+public class ShapeListBACKUP {
     ArrayList<IShape> SL;
 
-    public ShapeList (ArrayList<IShape> SL) { this.SL = SL;}
+    public ShapeListBACKUP (ArrayList<IShape> SL) { this.SL = SL;}
     public void add(IShape shape) { SL.add(shape); }
     public void remove(int i) { SL.remove(i); }
     public int getShapeIndex(IShape shape) {  return SL.indexOf(shape);  }

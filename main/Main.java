@@ -1,5 +1,7 @@
 package main;
 
+
+
 import controller.IJPaintController;
 import controller.JPaintController;
 import model.persistence.ApplicationState;
@@ -10,25 +12,27 @@ import view.interfaces.IGuiWindow;
 import view.interfaces.PaintCanvasBase;
 import view.interfaces.IUiModule;
 import controller.MouseController;
-import model.ShapeFactory;
 import model.interfaces.IShape;
-import model.ShapeList;
+import model.persistence.ShapeList;
 import java.util.ArrayList;
-
+import model.StateChangeHandler;
+import model.ShapeDrawer;
 
 public class Main {
     public static void main(String[] args){
-        PaintCanvasBase paintCanvas = new PaintCanvas(); //Probably wont need to modify, only ever want one instance
-        IGuiWindow guiWindow = new GuiWindow(paintCanvas); //Wont have to modify/know
+        PaintCanvasBase PCB = new PaintCanvas(); //Probably wont need to modify, only ever want one instance
+        IGuiWindow guiWindow = new GuiWindow(PCB); //Wont have to modify/know
         IUiModule uiModule = new Gui(guiWindow); //Wont have to modify/know
         ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
         IJPaintController controller = new JPaintController(uiModule, appState); //, only ever want one instance
-        final ShapeFactory SF = new ShapeFactory();
-        ShapeList SL = new ShapeList(new ArrayList<IShape>());
+        StateChangeHandler SCH = new StateChangeHandler();
+        ShapeList SL = new ShapeList(new ArrayList<IShape>(),SCH, PCB);
+        ShapeDrawer SD = new ShapeDrawer(PCB,SL);
+        SCH.registerObserver(SD);
         controller.setup(); 
 
 
-        paintCanvas.addMouseListener(new MouseController(paintCanvas,appState,SF,SL)); //Extends MouseAdapter
+        PCB.addMouseListener(new MouseController(PCB,appState,SL)); //Extends MouseAdapter
 
         // For example purposes only; remove all lines below from your final project.
 
@@ -36,7 +40,7 @@ public class Main {
 
         /*
         // Filled in rectangle
-        Graphics2D graphics2d = paintCanvas.getGraphics2D();
+        Graphics2D graphics2d = PCB.getGraphics2D();
         graphics2d.setColor(Color.GREEN);
         graphics2d.fillRect(12, 13, 200, 400);
 

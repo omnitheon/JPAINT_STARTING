@@ -4,17 +4,20 @@ import java.util.Stack;
 import model.interfaces.IUndoable;
 
 public class CommandHistory {
-	private static final Stack<IUndoable> undoStack = new Stack<IUndoable>();
-	private static final Stack<IUndoable> redoStack = new Stack<IUndoable>();
+	public static final Stack<IUndoable> undoStack = new Stack<IUndoable>();
+	public static final Stack<IUndoable> redoStack = new Stack<IUndoable>();
 
 	public static void add(IUndoable cmd) {
 		undoStack.push(cmd);
 		redoStack.clear();
+		dump();
 	}
 
+	public static boolean contains (IUndoable cmd) { return undoStack.contains(cmd); }
+
 	public static void dump() {
-		System.out.println("UNDO: "+undoStack);
-		System.out.println("REDO: "+redoStack);
+		System.out.println("\tCurrent UndoStack: "+undoStack);
+		System.out.println("\tCurrent RedoStack: "+redoStack);
 	}
 	
 	public static boolean undo() {

@@ -6,43 +6,51 @@ import java.awt.*;
 import model.interfaces.ICommand;
 import view.interfaces.PaintCanvasBase;
 import model.interfaces.IShape;
+import model.persistence.ShapeList;
 
 
-
-public class DrawRectangleCommand implements ICommand, IUndoable {
+public class DrawShapeCommand implements ICommand, IUndoable {
     PaintCanvasBase pcb;
     ShapeList SL;
-    IShape rect;
+    IShape shape;
 
-    public DrawRectangleCommand (IShape rect, PaintCanvasBase pcb, ShapeList SL) {
+    public DrawShapeCommand (IShape shape, PaintCanvasBase pcb, ShapeList SL) {
     this.pcb = pcb;
     this.SL = SL;
-    this.rect = rect;
+    this.shape = shape;
     }
     @Override
     public void run(){
+        System.out.println("DrawShapeCommand executing...");
         Graphics2D g2d = pcb.getGraphics2D();
         g2d.setColor(Color.BLACK);
-        rect.draw(g2d);
-        SL.add(rect);
+        shape.draw(g2d);
+        System.out.println("DrawShapeCommand added to CommandHistory...");
         CommandHistory.add(this);
     }
 
     @Override
     public void undo() { 
-        SL.remove(SL.getShapeIndex((rect)));
+        System.out.println("DrawShapeCommand UNDO...");
+        SL.remove(SL.getShapeIndex((shape)));
+        /*
         Graphics2D g2d = pcb.getGraphics2D();
         g2d.setColor(pcb.getBackground());
-        g2d.fillRect(0, 0, pcb.getWidth(), pcb.getHeight());
+        g2d.fillshape(0, 0, pcb.getWidth(), pcb.getHeight());
+        
         SL.drawShapes(pcb.getGraphics2D());
+        */
     }
     @Override
     public void redo() { 
-        SL.add(rect); 
+        System.out.println("DrawShapeCommand REDO...");
+        SL.add(shape); 
+        /*
         Graphics2D g2d = pcb.getGraphics2D();
         g2d.setColor(pcb.getBackground());
-        g2d.fillRect(0, 0, pcb.getWidth(), pcb.getHeight());
+        g2d.fillshape(0, 0, pcb.getWidth(), pcb.getHeight());
         SL.drawShapes(pcb.getGraphics2D());
+        */
     }
     }
         

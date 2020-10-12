@@ -1,7 +1,6 @@
 package model;
 
 import model.interfaces.IShape;
-import view.interfaces.PaintCanvasBase;
 /*
         ShapeFactory Client Code ... AKA "Consumer"... we receive IShapes
 
@@ -23,7 +22,11 @@ import view.interfaces.PaintCanvasBase;
 */
 
 public class ShapeFactory {
+    private ShapeFactory() { }
+
     //public IShape createEllipse() { return new Ellipse(1); }
-    public IShape createRectangle(int x, int y, int h, int w, int eX, int eY) { return new Rectangle(4, x, y, h, w, eX, eY); }
+    public static IShape createRectangle(int x, int y, int eX, int eY, int h, int w) { 
+        return new Rectangle(4, x, y, eX, eY, h, w); 
+    }
     //public IShape createTriangle(boolean isEquilateral) { return new Triangle(3, isEquilateral); }
 }
