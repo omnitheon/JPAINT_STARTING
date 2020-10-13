@@ -26,21 +26,21 @@ public class MouseController extends MouseAdapter {
     }
     @Override public void mouseReleased(MouseEvent e) {
         ICommand c;
-        int shapeWidth = e.getX() - startingPoint.getX();
-        int shapeHeight = e.getY() - startingPoint.getY();
         Point endingPoint = new PointBuilder().setX(e.getX()).setY(e.getY()).returnPoint();
         System.out.println("MouseReleased: "+endingPoint.toString());
         if (APPS.getActiveMouseMode().equals(MouseMode.DRAW)) {             
             //CreateShapeCommand
-            c = new CreateShapeCommand(APPS,SL,startingPoint,endingPoint,shapeHeight,shapeWidth);
+            c = new CreateShapeCommand(APPS,SL,startingPoint,endingPoint);
             c.run();
             System.out.println("[CreateShapeCommand] action added to CommandHistory...");
             CommandHistory.add(((IUndoable)c));
             
             
         }
-        else if (APPS.getActiveMouseMode().equals(MouseMode.SELECT)){}
+        else if (APPS.getActiveMouseMode().equals(MouseMode.SELECT)){
             //SelectShapeCommand
+        }
+            
         else { //MouseMode.MOVE
             //MoveShapeCommand
         }

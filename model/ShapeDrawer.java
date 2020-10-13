@@ -8,8 +8,8 @@ import model.interfaces.IObserver;
 import model.interfaces.ICommand;
 
 public class ShapeDrawer implements IObserver {
-    public ShapeList SL;
-    public PaintCanvasBase PCB;
+    private ShapeList SL;
+    private PaintCanvasBase PCB;
     
     public ShapeDrawer(PaintCanvasBase PCB, ShapeList SL){ this.SL = SL; this.PCB = PCB; }
 

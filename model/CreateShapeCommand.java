@@ -11,28 +11,25 @@ public class CreateShapeCommand implements ICommand, IUndoable {
     ShapeList SL;
     Point startingPoint;
     Point endingPoint;
-    int shapeHeight;
-    int shapeWidth;
     IShape createdShape;
     private Color primaryColor;
     private Color secondaryColor;
     ApplicationState APPS;
-
+    private ShapeShadingType SST;
     
-    public CreateShapeCommand(ApplicationState APPS, ShapeList SL, 
-                              Point startingPoint, Point endingPoint, int shapeHeight, int shapeWidth){
+    public CreateShapeCommand(ApplicationState APPS, ShapeList SL, Point startingPoint, Point endingPoint){
         this.SL = SL; 
         this.startingPoint = startingPoint; 
         this.endingPoint = endingPoint; 
-        this.shapeHeight = shapeHeight; 
-        this.shapeWidth = shapeWidth;
         this.ST = APPS.getActiveShapeType();
         this.primaryColor = convertShapeColor(APPS.getActivePrimaryColor());
         this.secondaryColor = convertShapeColor(APPS.getActiveSecondaryColor());
-
+        this.SST = APPS.getActiveShapeShadingType();
         if (ST.equals(ShapeType.RECTANGLE)){
-            this.createdShape = ShapeFactory.createRectangle(primaryColor,secondaryColor,startingPoint.getX(),startingPoint.getY(),
-                                                             endingPoint.getX(), endingPoint.getY(), shapeHeight, shapeWidth);
+            this.createdShape = ShapeFactory.createRectangle(SST,primaryColor,secondaryColor,startingPoint,endingPoint);
+        }
+        else if (ST.equals(ShapeType.ELLIPSE)){
+            this.createdShape = ShapeFactory.createEllipse(SST,primaryColor,secondaryColor,startingPoint,endingPoint);
         }
         
         

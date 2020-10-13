@@ -25,9 +25,13 @@ import java.awt.Color;
 public class ShapeFactory {
     private ShapeFactory() { }
 
-    //public IShape createEllipse() { return new Ellipse(1); }
-    public static IShape createRectangle(Color PC, Color SC, int x, int y, int eX, int eY, int h, int w) { 
-        return new Rectangle(4, PC, SC, x, y, eX, eY, h, w); 
+    public static IShape createEllipse(ShapeShadingType SST, Color PC, Color SC, Point Starting, Point Ending) { 
+        return new Ellipse(1, SST, PC, SC, Starting, Ending); 
     }
-    //public IShape createTriangle(boolean isEquilateral) { return new Triangle(3, isEquilateral); }
+    public static IShape createRectangle(ShapeShadingType SST, Color PC, Color SC, Point Starting, Point Ending) { 
+        return new Rectangle(4, SST, PC, SC, Starting, Ending); 
+    }
+    //public static IShape createTriangle(boolean isEquilateral) { 
+        //return new Triangle(3, isEquilateral, SST, PC, SC, Starting, Ending); 
+    //}
 }
