@@ -41,7 +41,7 @@ public class MouseController extends MouseAdapter {
             //SelectShapeCommand
         }
             
-        else { //MouseMode.MOVE
+        else if (APPS.getActiveMouseMode().equals(MouseMode.MOVE)){
             //MoveShapeCommand
         }
     }

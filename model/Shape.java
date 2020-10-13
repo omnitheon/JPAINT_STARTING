@@ -47,4 +47,5 @@ public abstract class Shape implements IShape {
     public int getSmallestX(){ return smallestX; }
     public int getWidth(){ return shapeHeight; }
     public int getHeight(){ return shapeWidth; }
+    public int getMidpoint(){ return midpoint; }
 }

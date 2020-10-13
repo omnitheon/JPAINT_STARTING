@@ -31,6 +31,9 @@ public class CreateShapeCommand implements ICommand, IUndoable {
         else if (ST.equals(ShapeType.ELLIPSE)){
             this.createdShape = ShapeFactory.createEllipse(SST,primaryColor,secondaryColor,startingPoint,endingPoint);
         }
+        else if (ST.equals(ShapeType.TRIANGLE)) {
+            this.createdShape = ShapeFactory.createTriangle(SST,primaryColor,secondaryColor,startingPoint,endingPoint);
+        }
         
         
     }

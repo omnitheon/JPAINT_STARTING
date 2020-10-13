@@ -25,7 +25,7 @@ public class Rectangle extends Shape {
 			else if (this.shapeWidth > 0 && this.shapeHeight < 0) g2d.drawRect(this.startingPoint.getX(), this.endingPoint.getY(), shapeWidth, Math.abs(shapeHeight));
 			else if (this.shapeWidth < 0 && this.shapeHeight < 0) g2d.drawRect(this.endingPoint.getX(), this.endingPoint.getY(), Math.abs(shapeWidth), Math.abs(shapeHeight));
 		}
-		else { // FILLED_IN AND OUTLINE
+		else if (this.SST.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)){
 			g2d.setColor(this.primaryColor);
 			if (this.shapeWidth > 0 && this.shapeHeight > 0) g2d.fillRect(this.startingPoint.getX(), this.startingPoint.getY(), shapeWidth, shapeHeight);
 			else if (this.shapeWidth < 0 && this.shapeHeight > 0) g2d.fillRect(this.endingPoint.getX(), this.startingPoint.getY(), Math.abs(shapeWidth), shapeHeight);
