@@ -38,6 +38,14 @@ public class Rectangle extends Shape {
 			else if (this.shapeWidth > 0 && this.shapeHeight < 0) g2d.drawRect(this.startingPoint.getX(), this.endingPoint.getY(), shapeWidth, Math.abs(shapeHeight));
 			else if (this.shapeWidth < 0 && this.shapeHeight < 0) g2d.drawRect(this.endingPoint.getX(), this.endingPoint.getY(), Math.abs(shapeWidth), Math.abs(shapeHeight));
 		}
+		if (this.isSelected){
+			g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0));
+			g2d.setColor(Color.BLACK);
+			if (this.shapeWidth > 0 && this.shapeHeight > 0) g2d.drawRect(this.startingPoint.getX(), this.startingPoint.getY(), shapeWidth, shapeHeight);
+			else if (this.shapeWidth < 0 && this.shapeHeight > 0) g2d.drawRect(this.endingPoint.getX(), this.startingPoint.getY(), Math.abs(shapeWidth), shapeHeight);
+			else if (this.shapeWidth > 0 && this.shapeHeight < 0) g2d.drawRect(this.startingPoint.getX(), this.endingPoint.getY(), shapeWidth, Math.abs(shapeHeight));
+			else if (this.shapeWidth < 0 && this.shapeHeight < 0) g2d.drawRect(this.endingPoint.getX(), this.endingPoint.getY(), Math.abs(shapeWidth), Math.abs(shapeHeight));
+		}
 	}
 
 	public String getString(){

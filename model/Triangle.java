@@ -23,6 +23,11 @@ class Triangle extends Shape {
             g2d.setColor(this.secondaryColor);
             g2d.drawPolygon(xCoordinates, YCoordinates, this.getNumSides());
 		}
+		if (this.isSelected){
+			g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0));
+			g2d.setColor(Color.BLACK);
+			g2d.drawPolygon(xCoordinates, YCoordinates, this.getNumSides());
+		}
 	}
 
 	public String getString() { return "Ellipse"; }

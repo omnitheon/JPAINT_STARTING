@@ -21,6 +21,11 @@ class Ellipse extends Shape {
 			g2d.setColor(this.secondaryColor);
 			g2d.drawOval(this.getSmallestX(), this.getSmallestY(), this.getWidth(), this.getHeight());
 			}
+		if (this.isSelected){
+				g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0));
+				g2d.setColor(Color.BLACK);
+				g2d.drawOval(this.getSmallestX(), this.getSmallestY(), this.getWidth(), this.getHeight());
+			}
 		}
 	
 

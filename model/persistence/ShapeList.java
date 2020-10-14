@@ -1,7 +1,6 @@
 package model.persistence;
 import java.util.List;
 import model.interfaces.IShape;
-import view.interfaces.PaintCanvasBase;
 import model.interfaces.IIterator;
 import java.util.ArrayList; 
 import java.util.Iterator;
@@ -10,12 +9,10 @@ import model.StateChangeHandler;
 public class ShapeList implements Iterable<IShape> {
     ArrayList<IShape> SL;
     StateChangeHandler SCH;
-    PaintCanvasBase PCB;
     
-    public ShapeList (ArrayList<IShape> SL, StateChangeHandler SCH, PaintCanvasBase PCB) { 
-        this.SL = SL; 
+    public ShapeList (StateChangeHandler SCH) { 
+        this.SL = new ArrayList<IShape>();
         this.SCH = SCH;
-        this.PCB = PCB;
     }
 
     public ShapeIterator iterator() { return new ShapeIterator(); }
@@ -33,7 +30,7 @@ public class ShapeList implements Iterable<IShape> {
     public int getShapeIndex(IShape shape) { return SL.indexOf(shape); }
     public List<IShape> getShapes() { return SL; }
     public void deleteAllShapes() { SL.clear(); }
-    
+    public int size() { return SL.size(); }
     class ShapeIterator implements Iterator<IShape>, IIterator {
         int currentIndex = 0;
         @Override public boolean hasNext() { return currentIndex < SL.size(); }

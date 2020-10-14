@@ -1,5 +1,8 @@
 package model.interfaces;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 
 import model.ShapeShadingType;
 
@@ -16,5 +19,8 @@ public interface IShape {
     int getSmallestX();
     int getWidth();
     int getHeight();
+    boolean intersectsWith(Rectangle rect);
+    void select();
+    void unselect();
 }
  

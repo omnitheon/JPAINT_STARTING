@@ -1,6 +1,7 @@
 package model;
 import model.interfaces.IShape;
 import java.awt.Color;
+import java.awt.Rectangle;
 
 public abstract class Shape implements IShape {
     int numSides;
@@ -16,7 +17,7 @@ public abstract class Shape implements IShape {
     int smallestY;
     int largestY;
     int midpoint;
-    
+    boolean isSelected;
 
     public Shape(int numSides, ShapeShadingType SST, Color PC, Color SC, Point startingPoint, Point endingPoint){ 
         this.numSides = numSides;
@@ -25,6 +26,7 @@ public abstract class Shape implements IShape {
         this.primaryColor = PC;
         this.secondaryColor = SC;
         this.SST = SST;
+        this.isSelected = false;
 
         this.smallestX = Math.min(this.startingPoint.getX(), this.endingPoint.getX());
         this.largestX = Math.max(this.startingPoint.getX(), this.endingPoint.getX());
@@ -38,6 +40,12 @@ public abstract class Shape implements IShape {
     }
     public int getNumSides() { return numSides; }
 
+    public boolean intersectsWith(Rectangle intersection){
+        Rectangle currentRectangle = new Rectangle(startingPoint.getX(), startingPoint.getY(), largestX-smallestX, largestY-smallestY);  
+        return currentRectangle.intersects(intersection);
+    } 
+  
+    
     public Color getPrimaryColor() { return primaryColor; }
     public Color getSecondaryColor() { return secondaryColor; }
     public ShapeShadingType getShapeShadingType() { return SST; }
@@ -48,4 +56,6 @@ public abstract class Shape implements IShape {
     public int getWidth(){ return shapeHeight; }
     public int getHeight(){ return shapeWidth; }
     public int getMidpoint(){ return midpoint; }
+    public void select() { this.isSelected = true; }
+    public void unselect() { this.isSelected = false; }
 }
