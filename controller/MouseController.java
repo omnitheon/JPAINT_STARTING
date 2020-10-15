@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import model.MouseMode;
 import model.persistence.ApplicationState;
 import model.persistence.ShapeList;
+import view.interfaces.PaintCanvasBase;
 import model.CreateShapeCommand;
 import model.MoveShapeCommand;
 import model.SelectShapeCommand;
@@ -21,11 +22,12 @@ public class MouseController extends MouseAdapter {
     private ApplicationState APPS;
     private ShapeList SL;
     private StateChangeHandler SCH;
-
-    public MouseController(ApplicationState APPS, ShapeList SL, StateChangeHandler SCH) { 
+    private PaintCanvasBase PCB;
+    public MouseController(PaintCanvasBase PCB, ApplicationState APPS, ShapeList SL, StateChangeHandler SCH) { 
         this.APPS = APPS;  
         this.SL = SL; 
         this.SCH = SCH;
+        this.PCB = PCB;
     }
     
     @Override public void mousePressed(MouseEvent e) { 
@@ -39,7 +41,8 @@ public class MouseController extends MouseAdapter {
         
         System.out.println("MouseReleased: "+endingPoint.toString());
         System.out.println("\n\n");
-        if (APPS.getActiveMouseMode().equals(MouseMode.DRAW)) {             
+        if (APPS.getActiveMouseMode().equals(MouseMode.DRAW)) {     
+            System.out.println("\n\n*******[DRAW EVENT]*******\n\n");        
             //CreateShapeCommand
             SelectShapeCommand tempSSC;
             tempSSC = new SelectShapeCommand(APPS,SL,startingPoint,endingPoint,SCH);
@@ -51,16 +54,20 @@ public class MouseController extends MouseAdapter {
         }
         else if (APPS.getActiveMouseMode().equals(MouseMode.SELECT)){
             //SelectShapeCommand
+            System.out.println("\n\n*******[SELECT EVENT]*******\n\n");
             c = new SelectShapeCommand(APPS,SL,startingPoint,endingPoint,SCH);
             c.run();
         }
             
         else if (APPS.getActiveMouseMode().equals(MouseMode.MOVE)){
+            System.out.println("\n\n*******[MOVE EVENT]*******\n\n");
             //MoveShapeCommand
-            c = new MoveShapeCommand(APPS,SL,startingPoint,endingPoint);
-            c.run();
-            System.out.println("[MoveShapeCommand] action added to CommandHistory...");
-            CommandHistory.add(((IUndoable)c));
+            if (SL.areShapesSelected()){
+                c = new MoveShapeCommand(PCB,APPS,SL,startingPoint,endingPoint,SCH);
+                c.run();
+                System.out.println("[MoveShapeCommand] action added to CommandHistory...");
+                CommandHistory.add(((IUndoable)c));
+            }
         }
     }
 

@@ -29,16 +29,16 @@ public class SelectShapeCommand implements ICommand {
         this.endingPoint = endingPoint; 
         this.APPS = APPS;
         this.SCH = SCH;
-        this.selectedShapes = new ShapeList(SCH);
+        this.selectedShapes = new ShapeList(SCH,"selected");
         this.smallestX = Math.min(this.startingPoint.getX(), this.endingPoint.getX());
         this.largestX = Math.max(this.startingPoint.getX(), this.endingPoint.getX());
         this.smallestY = Math.min(this.startingPoint.getY(), this.endingPoint.getY());
         this.largestY = Math.max(this.startingPoint.getY(), this.endingPoint.getY());
         int width = Math.abs(largestX-smallestX);
         int length = largestY-smallestY;
-        if (width == 0 && length == 0) {width = 1; length = 1;}
+        if (width == 0 && length == 0) {width = 2; length = 2;} //single click, give it a 2x2 so it can actually intersect.
         /*
-        if (width < 0 && length < 0) {
+        if (width < 0 && length < 0) { // havent handled backwards selection
             this.smallestX = Math.min(this.startingPoint.getX(), this.endingPoint.getX());
         this.largestX = Math.max(this.startingPoint.getX(), this.endingPoint.getX());
         this.smallestY = Math.min(this.startingPoint.getY(), this.endingPoint.getY());

@@ -58,4 +58,7 @@ public abstract class Shape implements IShape {
     public int getMidpoint(){ return midpoint; }
     public void select() { this.isSelected = true; }
     public void unselect() { this.isSelected = false; }
+    public boolean isSelected() { return this.isSelected; }
+    public Point getStartingPoint(){ return startingPoint; }
+    public Point getEndingPoint(){ return endingPoint; }
 }

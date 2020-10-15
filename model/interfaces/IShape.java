@@ -2,6 +2,7 @@ package model.interfaces;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import model.Point;
 
 
 import model.ShapeShadingType;
@@ -22,5 +23,8 @@ public interface IShape {
     boolean intersectsWith(Rectangle rect);
     void select();
     void unselect();
+    boolean isSelected();
+    Point getStartingPoint();
+    Point getEndingPoint();
 }
  

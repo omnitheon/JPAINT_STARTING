@@ -24,13 +24,13 @@ public class Main {
         ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
         IJPaintController controller = new JPaintController(uiModule, appState); //, only ever want one instance
         StateChangeHandler SCH = new StateChangeHandler();
-        ShapeList SL = new ShapeList(SCH);
+        ShapeList SL = new ShapeList(SCH,"main");
         ShapeDrawer SD = new ShapeDrawer(PCB,SL);
         SCH.registerObserver(SD);
         controller.setup(); 
 
 
-        PCB.addMouseListener(new MouseController(appState,SL,SCH)); //Extends MouseAdapter
+        PCB.addMouseListener(new MouseController(PCB,appState,SL,SCH)); //Extends MouseAdapter
 
         // For example purposes only; remove all lines below from your final project.
 

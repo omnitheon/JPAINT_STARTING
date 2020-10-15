@@ -9,28 +9,35 @@ import model.StateChangeHandler;
 public class ShapeList implements Iterable<IShape> {
     ArrayList<IShape> SL;
     StateChangeHandler SCH;
+    String type;
     
-    public ShapeList (StateChangeHandler SCH) { 
+    public ShapeList (StateChangeHandler SCH, String type) { 
         this.SL = new ArrayList<IShape>();
         this.SCH = SCH;
+        this.type = type;
     }
 
     public ShapeIterator iterator() { return new ShapeIterator(); }
     
     public void add(IShape shape) { 
-        System.out.println("[SHAPELIST] value added to ShapeList...");
-        SL.add(shape);
-        SCH.update();
+        System.out.println("[SHAPELIST] value added to ("+this.type+") ShapeList...");
+        this.SL.add(shape);
+        if (this.SCH != null) this.SCH.update();
     }
     public void remove(int i) { 
-        System.out.println("[SHAPELIST] value removed from ShapeList...");
-        SL.remove(i);
-        SCH.update();
+        System.out.println("[SHAPELIST] value removed from ("+this.type+") ShapeList...");
+        this.SL.remove(i);
+        if (this.SCH != null) this.SCH.update();
     }
     public int getShapeIndex(IShape shape) { return SL.indexOf(shape); }
     public List<IShape> getShapes() { return SL; }
     public void deleteAllShapes() { SL.clear(); }
     public int size() { return SL.size(); }
+    public boolean areShapesSelected(){
+        for(IShape shape: SL) if (shape.isSelected() == true) return true;
+        return false;
+    }
+
     class ShapeIterator implements Iterator<IShape>, IIterator {
         int currentIndex = 0;
         @Override public boolean hasNext() { return currentIndex < SL.size(); }
