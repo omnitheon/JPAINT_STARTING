@@ -27,7 +27,12 @@ public class MoveShapeCommand implements ICommand, IUndoable {
         this.APPS = APPS;
         this.SCH = SCH;
         this.deltaX = endingPoint.getX() - startingPoint.getX();
-        this.deltaY = endingPoint.getY() - startingPoint.getX();
+        this.deltaY = endingPoint.getY() - startingPoint.getY();
+        if (deltaX < 0 && deltaY < 0){
+            startingPoint = new PointBuilder().setX(endingPoint.getX()).setY(endingPoint.getY()).returnPoint();
+            endingPoint = new PointBuilder().setX(startingPoint.getX()).setY(startingPoint.getY()).returnPoint();
+        }
+        
         this.movedShapes = new ShapeList(null,"moved");//unobserved shape list
         this.removedShapes = new ArrayList<IShape>();
         this.SD = new ShapeDrawer(PCB,SL);
@@ -70,7 +75,8 @@ public class MoveShapeCommand implements ICommand, IUndoable {
     }
 
     public void redo(){
-        run();
+        for(IShape shape: movedShapes) SL.add(shape);
+        for(IShape shape: removedShapes) SL.remove(SL.getShapeIndex(shape));
         
     }
     public void undo(){
