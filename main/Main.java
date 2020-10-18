@@ -21,21 +21,16 @@ public class Main {
         PaintCanvasBase PCB = new PaintCanvas(); //Probably wont need to modify, only ever want one instance
         IGuiWindow guiWindow = new GuiWindow(PCB); //Wont have to modify/know
         IUiModule uiModule = new Gui(guiWindow); //Wont have to modify/know
-        ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
-        IJPaintController controller = new JPaintController(uiModule, appState); //, only ever want one instance
         StateChangeHandler SCH = new StateChangeHandler();
         ShapeList SL = new ShapeList(SCH,"main");
+        ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
+        IJPaintController controller = new JPaintController(uiModule, appState, SL); //, only ever want one instance
         ShapeDrawer SD = new ShapeDrawer(PCB,SL);
         SCH.registerObserver(SD);
         controller.setup(); 
-
-
         PCB.addMouseListener(new MouseController(PCB,appState,SL,SCH)); //Extends MouseAdapter
 
         // For example purposes only; remove all lines below from your final project.
-
         try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
-
-        
     }
 }

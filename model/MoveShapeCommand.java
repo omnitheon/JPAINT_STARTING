@@ -35,9 +35,10 @@ public class MoveShapeCommand implements ICommand, IUndoable {
         
         this.movedShapes = new ShapeList(null,"moved");//unobserved shape list
         this.removedShapes = new ArrayList<IShape>();
-        this.SD = new ShapeDrawer(PCB,SL);
         this.PCB = PCB;
     }
+
+    
     public void run(){
         for(IShape shape: SL){
             if(shape.isSelected()) {
@@ -47,6 +48,12 @@ public class MoveShapeCommand implements ICommand, IUndoable {
                 int newEndingPointY = shape.getEndingPoint().getY()+deltaY;
                 Point newStartingPoint = new PointBuilder().setX(newStartingPointX).setY(newStartingPointY).returnPoint();
                 Point newEndingPoint = new PointBuilder().setX(newEndingPointX).setY(newEndingPointY).returnPoint();
+                
+                //System.out.println("DeltaX: "+ deltaX);
+                //System.out.println("DeltaY: "+ deltaY);
+
+                //System.out.println("\tOld starting/ending point: " + shape.getStartingPoint() + ", "+ shape.getEndingPoint());
+                //System.out.println("\tNew starting/ending point: " + newStartingPoint + ", "+ newEndingPoint);
                 IShape deltaShape;
 
                 if (shape.getString().equals("Rectangle")){
@@ -57,30 +64,31 @@ public class MoveShapeCommand implements ICommand, IUndoable {
                     deltaShape = ShapeFactory.createTriangle(shape.getShapeShadingType(),shape.getPrimaryColor(),shape.getSecondaryColor(),newStartingPoint,newEndingPoint);
                     swap(deltaShape,shape);
                 }
-                else if (shape.getString().equals("Ellipse")){
+                else {
                     deltaShape = ShapeFactory.createEllipse(shape.getShapeShadingType(),shape.getPrimaryColor(),shape.getSecondaryColor(),newStartingPoint,newEndingPoint);
                     swap(deltaShape,shape);
                 }
                 
             }
         }
-        
+        for(IShape shape: removedShapes) SL.remove(SL.getShapeIndex(shape),false);
+        for(IShape shape: movedShapes) SL.add(shape,false);
+        SL.notifyObserver();
     }
     public void swap(IShape deltaShape, IShape originalShape){
         deltaShape.select();
-        SL.remove(SL.getShapeIndex(originalShape));
-        SL.add(deltaShape);
-        movedShapes.add(deltaShape);
+        movedShapes.add(deltaShape,false);
         removedShapes.add(originalShape);
     }
 
     public void redo(){
-        for(IShape shape: movedShapes) SL.add(shape);
-        for(IShape shape: removedShapes) SL.remove(SL.getShapeIndex(shape));
-        
+        for(IShape shape: movedShapes) SL.add(shape,false);
+        for(IShape shape: removedShapes) SL.remove(SL.getShapeIndex(shape),false);
+        SL.notifyObserver();
     }
     public void undo(){
-        for(IShape shape: removedShapes) SL.add(shape);
-        for(IShape shape: movedShapes) SL.remove(SL.getShapeIndex(shape));
+        for(IShape shape: removedShapes) SL.add(shape,false);
+        for(IShape shape: movedShapes) SL.remove(SL.getShapeIndex(shape),false);
+        SL.notifyObserver();
     }
 }

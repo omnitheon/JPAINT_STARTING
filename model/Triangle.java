@@ -30,5 +30,5 @@ class Triangle extends Shape {
 		}
 	}
 
-	public String getString() { return "Ellipse"; }
+	public String getString() { return "Triangle"; }
 }

@@ -55,11 +55,13 @@ public class SelectShapeCommand implements ICommand {
         for(IShape shape: SL){
             if(shape.intersectsWith(intersection)) {
                 shape.select();
-                selectedShapes.add(shape);
-                System.out.println("Found Shape in intersection..."+shape);
+                selectedShapes.add(shape,false);
+                System.out.println("\tFound Shape in intersection..."+shape);
             }
         }
+       
         if (selectedShapes.size()==0) unselectAll(this.SL);
+        else selectedShapes.notifyObserver();
 
         System.out.println("[SelectShapeCommand] exiting!");
         System.out.println("\n\n");
@@ -67,8 +69,8 @@ public class SelectShapeCommand implements ICommand {
     public void unselectAll(ShapeList SL){
         for(IShape shape: SL) {
             shape.unselect(); 
-            SCH.update();
         }
+        SCH.update();
     }
 }
    

@@ -39,18 +39,18 @@ public class CreateShapeCommand implements ICommand, IUndoable {
     }
     @Override public void run(){
         System.out.println("[CreateShapeCommand] STARTING:...making shape and adding to ShapeList: ");
-        SL.add(createdShape);
+        SL.add(createdShape,true);
         System.out.println("[CreateShapeCommand] DONE: modified ShapeList: "+SL.getShapes());
         System.out.println("\n\n");
     }  
 
     @Override public void undo() { 
         System.out.println("[CreateShapeCommand] UNDO...");
-        SL.remove(SL.getShapeIndex((createdShape)));
+        SL.remove(SL.getShapeIndex((createdShape)),true);
     }
     @Override public void redo() { 
         System.out.println("[CreateShapeCommand] REDO...");
-        SL.add(createdShape); 
+        SL.add(createdShape,true); 
     }
     public static Color convertShapeColor(ShapeColor SC){
         switch (SC) { 

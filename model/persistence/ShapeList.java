@@ -19,16 +19,31 @@ public class ShapeList implements Iterable<IShape> {
 
     public ShapeIterator iterator() { return new ShapeIterator(); }
     
+    /*
     public void add(IShape shape) { 
         System.out.println("[SHAPELIST] value added to ("+this.type+") ShapeList...");
         this.SL.add(shape);
         if (this.SCH != null) this.SCH.update();
     }
-    public void remove(int i) { 
+    */
+
+    public void add(IShape shape, boolean notifyAfterAdd) { 
+        System.out.println("[SHAPELIST] value added to ("+this.type+") ShapeList...");
+        this.SL.add(shape);
+        if (this.SCH != null && notifyAfterAdd) this.SCH.update();
+    }
+
+    public void remove(int i, boolean notifyAfterRemove) { 
         System.out.println("[SHAPELIST] value removed from ("+this.type+") ShapeList...");
         this.SL.remove(i);
+        if (this.SCH != null && notifyAfterRemove) this.SCH.update();
+    }
+
+    public void notifyObserver(){
         if (this.SCH != null) this.SCH.update();
     }
+
+    
     public int getShapeIndex(IShape shape) { return SL.indexOf(shape); }
     public List<IShape> getShapes() { return SL; }
     public void deleteAllShapes() { SL.clear(); }
