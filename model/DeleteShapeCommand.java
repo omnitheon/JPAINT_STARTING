@@ -15,10 +15,11 @@ public class DeleteShapeCommand implements ICommand, IUndoable {
     public void run(){
         for(IShape shape: SL){
             if(shape.isSelected()) {
-                deletedShapes.add(shape,true);
-                SL.remove(SL.getShapeIndex(shape),true);
+                deletedShapes.add(shape,false);
                 }
             }
+        for(IShape shape: deletedShapes) SL.remove(SL.getShapeIndex(shape),true);
+        
         CommandHistory.add((IUndoable)this);
         }
         
