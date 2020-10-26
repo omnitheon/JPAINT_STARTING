@@ -23,8 +23,9 @@ public class Main {
         IUiModule uiModule = new Gui(guiWindow); //Wont have to modify/know
         StateChangeHandler SCH = new StateChangeHandler();
         ShapeList SL = new ShapeList(SCH,"main");
+        ShapeList Clipboard = new ShapeList(null,"clipboard");//unobserved shape list
         ApplicationState appState = new ApplicationState(uiModule); //, only ever want one instance
-        IJPaintController controller = new JPaintController(uiModule, appState, SL); //, only ever want one instance
+        IJPaintController controller = new JPaintController(uiModule, appState, SL, Clipboard); //, only ever want one instance
         ShapeDrawer SD = new ShapeDrawer(PCB,SL);
         SCH.registerObserver(SD);
         controller.setup(); 

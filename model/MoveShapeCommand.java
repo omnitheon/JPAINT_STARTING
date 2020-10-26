@@ -48,12 +48,6 @@ public class MoveShapeCommand implements ICommand, IUndoable {
                 int newEndingPointY = shape.getEndingPoint().getY()+deltaY;
                 Point newStartingPoint = new PointBuilder().setX(newStartingPointX).setY(newStartingPointY).returnPoint();
                 Point newEndingPoint = new PointBuilder().setX(newEndingPointX).setY(newEndingPointY).returnPoint();
-                
-                //System.out.println("DeltaX: "+ deltaX);
-                //System.out.println("DeltaY: "+ deltaY);
-
-                //System.out.println("\tOld starting/ending point: " + shape.getStartingPoint() + ", "+ shape.getEndingPoint());
-                //System.out.println("\tNew starting/ending point: " + newStartingPoint + ", "+ newEndingPoint);
                 IShape deltaShape;
 
                 if (shape.getString().equals("Rectangle")){

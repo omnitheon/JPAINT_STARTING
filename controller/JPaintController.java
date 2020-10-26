@@ -8,15 +8,19 @@ import model.RedoCommand;
 import model.DeleteShapeCommand;
 import model.CopyShapeCommand;
 import model.persistence.ShapeList;
+import model.CopyShapeCommand;
+import model.PasteShapeCommand;
 
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
     private final IApplicationState applicationState;
     private ShapeList SL;
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList SL) {
+    private ShapeList CLIPBOARD;
+    public JPaintController(IUiModule uiModule, IApplicationState applicationState, ShapeList SL, ShapeList CLIPBOARD) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.SL = SL;
+        this.CLIPBOARD = CLIPBOARD;
     }
 
 
@@ -34,10 +38,7 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.UNDO, () -> new UndoCommand().run());
         uiModule.addEvent(EventName.REDO, () -> new RedoCommand().run());
         uiModule.addEvent(EventName.DELETE, () -> new DeleteShapeCommand(SL).run());
-        //uiModule.addEvent(EventName.COPY, () -> new CopyShapeCommand().run());
-        //uiModule.addEvent(EventName.PASTE, () -> new PasteShapeCommand().run());
-        
-        //copy
-        //pastes
+        uiModule.addEvent(EventName.COPY, () -> new CopyShapeCommand(SL,CLIPBOARD).run());
+        uiModule.addEvent(EventName.PASTE, () -> new PasteShapeCommand(SL,CLIPBOARD).run());
     }
 }

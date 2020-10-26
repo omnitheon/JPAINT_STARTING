@@ -38,6 +38,7 @@ public abstract class Shape implements IShape {
         this.shapeHeight = largestY-smallestY;
         this.midpoint = (smallestX)+((largestX-smallestX)/2);
     }
+
     public int getNumSides() { return numSides; }
 
     public boolean intersectsWith(Rectangle intersection){
