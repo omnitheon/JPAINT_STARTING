@@ -8,7 +8,6 @@ import model.RedoCommand;
 import model.DeleteShapeCommand;
 import model.CopyShapeCommand;
 import model.persistence.ShapeList;
-import model.CopyShapeCommand;
 import model.PasteShapeCommand;
 
 public class JPaintController implements IJPaintController {
