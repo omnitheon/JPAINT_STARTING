@@ -6,40 +6,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import model.StateChangeHandler;
 
-public class ShapeList implements Iterable<IShape> {
+public class SelectedShapeList implements Iterable<IShape> {
     ArrayList<IShape> SL;
     StateChangeHandler SCH;
-    String type;
-    private static final ShapeList instance = new ShapeList(StateChangeHandler.getInstance(),"main");
     
-    private ShapeList (StateChangeHandler SCH, String type) { 
+    public SelectedShapeList (StateChangeHandler SCH) { 
         this.SL = new ArrayList<IShape>();
         this.SCH = SCH;
-        this.type = type;
     }
 
-    public static ShapeList getInstance(){
-        return instance;
-    }
-    
     public ShapeIterator iterator() { return new ShapeIterator(); }
-    
-    /*
-    public void add(IShape shape) { 
-        System.out.println("[SHAPELIST] value added to ("+this.type+") ShapeList...");
-        this.SL.add(shape);
-        if (this.SCH != null) this.SCH.update();
-    }
-    */
 
     public void add(IShape shape, boolean notifyAfterAdd) { 
-        System.out.println("[SHAPELIST] value added to ("+this.type+") ShapeList...");
+        System.out.println("[SHAPELIST] value added to (selected) ShapeList...");
         this.SL.add(shape);
         if (this.SCH != null && notifyAfterAdd) this.SCH.update();
     }
 
     public void remove(int i, boolean notifyAfterRemove) { 
-        System.out.println("[SHAPELIST] value removed from ("+this.type+") ShapeList...");
+        System.out.println("[SHAPELIST] value removed from (selected) ShapeList...");
         this.SL.remove(i);
         if (this.SCH != null && notifyAfterRemove) this.SCH.update();
     }
@@ -54,7 +39,7 @@ public class ShapeList implements Iterable<IShape> {
     public void deleteAllShapes() { SL.clear(); }
     public int size() { return SL.size(); }
     public boolean areShapesSelected(){
-        for(IShape shape: SL) if (shape.isSelected() == true) return true;
+        for(IShape shape: SL) if (shape.isSelected()) return true;
         return false;
     }
 

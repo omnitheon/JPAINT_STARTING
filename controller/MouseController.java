@@ -8,13 +8,13 @@ import java.awt.event.MouseEvent;
 import model.MouseMode;
 import model.persistence.ApplicationState;
 import model.persistence.ShapeList;
-import view.interfaces.PaintCanvasBase;
 import model.CreateShapeCommand;
 import model.MoveShapeCommand;
 import model.SelectShapeCommand;
 import model.StateChangeHandler;
 import model.CommandHistory;
 import model.interfaces.IUndoable;
+import view.interfaces.PaintCanvasBase;
 
 
 public class MouseController extends MouseAdapter {

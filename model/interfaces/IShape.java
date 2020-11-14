@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import model.Point;
-
+import java.util.ArrayList;
 
 import model.ShapeShadingType;
 
@@ -26,5 +26,7 @@ public interface IShape {
     boolean isSelected();
     Point getStartingPoint();
     Point getEndingPoint();
+    ArrayList<IShape> getGroupOfShapes();
+    void setGroupOfShapes(ArrayList<IShape> AL);
 }
  

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StateChangeHandler implements ISubject, IShapeListObserver {
+    private static final StateChangeHandler SCH = new StateChangeHandler();
+    private StateChangeHandler() {}
+    public static StateChangeHandler getInstance(){
+        return SCH;
+    }
     private List<IObserver> observers = new ArrayList<>();
     @Override public void registerObserver(IObserver observer) { observers.add(observer); }
     @Override public void removeObserver(IObserver observer) { observers.remove(observer); }

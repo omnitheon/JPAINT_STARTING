@@ -21,7 +21,7 @@ public class DrawShapeCommand implements ICommand {
     }
     @Override
     public void run(){
-        System.out.println("DrawShapeCommand executing...");
+        System.out.println("[DrawShapeCommand] executing...");
         Graphics2D g2d = pcb.getGraphics2D();       
         shape.draw(g2d);
     }
